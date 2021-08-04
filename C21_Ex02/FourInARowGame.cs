@@ -99,7 +99,123 @@ namespace C21_Ex02
 
             return validCol; 
         }
+        public bool validRow(int i_Row)
+        {
+            bool validRow = false;
 
+            if (i_Row > 0 && i_Row <= board.GetLength(0))
+            {
+                validRow = true;
+            }
+
+            return validRow;
+        }
+        public bool IsOnBoard(Point i_MatrixPoint)
+        {
+            bool onBoard = false;
+            bool isValidColum = validCol(i_MatrixPoint.X);
+            bool isValidRow = validRow(i_MatrixPoint.Y);
+
+            if (isValidColum == true && isValidRow == true)
+            {
+                onBoard = true;
+            }
+
+            return onBoard;
+        }
+        public bool StopCheckForAFour(Point i_MatrixPoint, Player i_Player)
+        {
+            bool stopCheck = IsOnBoard(i_MatrixPoint);
+
+            if (stopCheck == false)
+            {
+                if (board[i_MatrixPoint.X, i_MatrixPoint.Y] != i_Player.Sign)
+                {
+                    stopCheck = false;
+                }
+            }
+
+            return stopCheck;
+        }
+        public bool CheckDiagonals(Point i_MatrixPoint, Player i_Player)
+        {
+            bool isWin = false;
+            bool leftDiagonal = CheckLeftDiagonal(i_MatrixPoint, i_Player);
+            bool rightDiagonal = CheckRightDiagonal(i_MatrixPoint, i_Player);
+            if(leftDiagonal==true|| rightDiagonal == true)
+            {
+                isWin = true;
+            }
+            return isWin;
+        }
+        public bool CheckLeftDiagonal(Point i_MatrixPoint, Player i_Player)
+        {
+            int signCount = 1;
+            bool checkRightDown = true, checkUpRLeft = true, diagonalFourInARow = false;
+            Point currentPoint = i_MatrixPoint;
+
+            while (checkRightDown == false)
+            {
+                currentPoint.AddValues(1, 1);
+                checkRightDown = StopCheckForAFour(currentPoint, i_Player);
+                if (checkRightDown == false)
+                {
+                    signCount++;
+                }
+            }
+
+            currentPoint = i_MatrixPoint;
+            while (checkUpRLeft == false)
+            {
+                currentPoint.AddValues(-1, -1);
+                checkRightDown = StopCheckForAFour(currentPoint, i_Player);
+                if (checkRightDown == false)
+                {
+                    signCount++;
+                }
+            }
+
+            if (signCount >= 4)
+            {
+                diagonalFourInARow = true;
+            }
+
+            return diagonalFourInARow;
+        }
+        public bool CheckRightDiagonal(Point i_MatrixPoint, Player i_Player)
+        {
+            int signCount = 1;
+            bool checkRightUp = true, checkLeftDown = true, diagonalFourInARow = false;
+            Point currentPoint = i_MatrixPoint;
+
+            while (checkRightUp == false)
+            {
+                currentPoint.AddValues(1,-1);
+                checkRightUp = StopCheckForAFour(currentPoint, i_Player);
+                if (checkRightUp == false)
+                {
+                    signCount++;
+                }
+            }
+
+            currentPoint = i_MatrixPoint;
+            while (checkLeftDown == false)
+            {
+                currentPoint.AddValues(-1, 1);
+                checkLeftDown = StopCheckForAFour(currentPoint, i_Player);
+                if (checkLeftDown == false)
+                {
+                    signCount++;
+                }
+            }
+
+            if (signCount >= 4)
+            {
+                diagonalFourInARow = true;
+            }
+
+            return diagonalFourInARow;
+        }
 
         public bool GetRowToInput(int i_MatrixCol, out int io_MatrixRow)
         {
@@ -139,31 +255,31 @@ namespace C21_Ex02
 
         public bool CheckRowToRight(Player i_Player, Point i_LastMove)
         {
-            bool isThereFoureCoins = false;
+            bool isThereFourCoins = false;
             int coinsCount = 0;
-            int currentCol = i_LastMove.Col;
+            int currentCol = i_LastMove.X;
 
-            while (board[i_LastMove.Row][currentCol] == i_Player.Sign && currentCol < board.GetLength(0))
+            while (board[i_LastMove.Y,currentCol] == i_Player.Sign && currentCol < board.GetLength(0))
             {
                 coinsCount++;
                 currentCol++;
                 if (coinsCount == 4)
                 {
-                    isThereFoureCoins =  true;
+                    isThereFourCoins =  true;
                     break;
                 }
             }
 
-            return isThereFoureCoins;
+            return isThereFourCoins;
         }
 
         public bool CheckRowToLeft(Player i_Player, Point i_LastMove)
         {
             bool isThereFoureCoins = false;
             int coinsCount = 0;
-            int currentCol = i_LastMove.Col;
+            int currentCol = i_LastMove.X;
 
-            while (board[i_LastMove.Row][currentCol] == i_Player.Sign && currentCol >= 0)
+            while (board[i_LastMove.Y,currentCol] == i_Player.Sign && currentCol >= 0)
             {
                 coinsCount++;
                 currentCol--;
@@ -178,18 +294,18 @@ namespace C21_Ex02
 
         public bool CheckRow(Player i_Player, Point i_LastMove)
         {
-            bool isThereFoureCoins =false;
+            bool isThereFourCoins =false;
 
             if(CheckRowToRight(i_Player, i_LastMove) == true)
             {
-                isThereFoureCoins = true;
+                isThereFourCoins = true;
             }
             else if(CheckRowToLeft(i_Player, i_LastMove) == true)
             {
-                isThereFoureCoins = true;
+                isThereFourCoins = true;
             }
 
-            return isThereFoureCoins;
+            return isThereFourCoins;
         }
 
         public bool CheckIfWon(Player i_Player, Point i_LastMove)
@@ -199,15 +315,19 @@ namespace C21_Ex02
             {
                 isWon = true;
             }
-            else if(CheckCol(i_Player, i_LastMove) ==true)
+            if(CheckDiagonals(i_LastMove, i_Player) == true)
             {
                 isWon = true;
             }
+          /*  else if(CheckCol(i_Player, i_LastMove) ==true)
+            {
+                isWon = true;
+            }*/
 
             return isWon;
             
         }
-        public bool CheckIfGameOver()
+        public bool CheckIfGameOver(Player i_Player, Point i_LastMove)
         {
             bool isGameOver = false;
 
@@ -221,12 +341,12 @@ namespace C21_Ex02
                 //UI.PrintMsg(player2Wins);
                 isGameOver = true;
             }
-            else if(CheckIfDraw(i_LastMove) == true)
-            {
-                //UI.PrintMsg(Draw);
-                isGameOver = true;
-            }
-
+            /* else if(CheckIfDraw(i_LastMove) == true)
+             {
+                 //UI.PrintMsg(Draw);
+                 isGameOver = true;
+             }*/
+            return isGameOver;
         }
 
         public void RunGame()
