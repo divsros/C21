@@ -137,19 +137,69 @@ namespace C21_Ex02
             return validInput;
         }
 
-        public bool checkRow(Player i_player, Point i_LastMove)
+        public bool CheckRowToRight(Player i_Player, Point i_LastMove)
         {
-            
+            bool isThereFoureCoins = false;
+            int coinsCount = 0;
+            int currentCol = i_LastMove.Col;
+
+            while (board[i_LastMove.Row][currentCol] == i_Player.Sign && currentCol < board.GetLength(0))
+            {
+                coinsCount++;
+                currentCol++;
+                if (coinsCount == 4)
+                {
+                    isThereFoureCoins =  true;
+                    break;
+                }
+            }
+
+            return isThereFoureCoins;
         }
 
-        public bool CheckIfWon(Player i_player, Point i_LastMove)
+        public bool CheckRowToLeft(Player i_Player, Point i_LastMove)
+        {
+            bool isThereFoureCoins = false;
+            int coinsCount = 0;
+            int currentCol = i_LastMove.Col;
+
+            while (board[i_LastMove.Row][currentCol] == i_Player.Sign && currentCol >= 0)
+            {
+                coinsCount++;
+                currentCol--;
+                if (coinsCount == 4)
+                {
+                    isThereFoureCoins = true;
+                }
+            }
+
+            return isThereFoureCoins;
+        }
+
+        public bool CheckRow(Player i_Player, Point i_LastMove)
+        {
+            bool isThereFoureCoins =false;
+
+            if(CheckRowToRight(i_Player, i_LastMove) == true)
+            {
+                isThereFoureCoins = true;
+            }
+            else if(CheckRowToLeft(i_Player, i_LastMove) == true)
+            {
+                isThereFoureCoins = true;
+            }
+
+            return isThereFoureCoins;
+        }
+
+        public bool CheckIfWon(Player i_Player, Point i_LastMove)
         {
             bool isWon = false; 
-            if(CheckRow(i_player ,i_LastMove) == true)
+            if(CheckRow(i_Player ,i_LastMove) == true)
             {
                 isWon = true;
             }
-            else if(checkCol(i_Col) ==true)
+            else if(CheckCol(i_Player, i_LastMove) ==true)
             {
                 isWon = true;
             }
