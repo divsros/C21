@@ -11,7 +11,7 @@ namespace C21_Ex02
 
         private Player player1;
         private Player player2;
-        private int[,] board;
+        private char[,] board;
         private string winner;
 
 
@@ -26,14 +26,22 @@ namespace C21_Ex02
             player2= new Player(i_Player2.Sign);
             winner = string.Empty;
         }
-        public void setBoard(int i_Rows, int i_Cols)
+        public void initialBoard(int i_Rows, int i_Cols)
         {
             if (i_Rows > 0 && i_Cols > 0)
             {
-                board = new int[i_Rows, i_Cols];
+                board = new char[i_Rows, i_Cols];
             }
         }
-  
+        public bool setBoard(int i_Col)
+        {
+
+
+        }
+        public char[,] getBoard()
+        {
+            return board;
+        }
         public Player Player1
         {
             get 
@@ -87,6 +95,7 @@ namespace C21_Ex02
 
 
         public bool validMove() { return true; }//need to write
+
 
 
     }

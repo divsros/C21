@@ -8,15 +8,16 @@ namespace C21_Ex02
 {
     class UI
     {
-        public static void PrintBoard(int[,] i_Board)
+        public static void PrintBoard(char[,] i_Board)
         {
-            int signAmount = 5 * i_Board.GetLength(1);
+            int signAmount = 1 + 4 * i_Board.GetLength(1);
+
             StringBuilder result = new StringBuilder();
             for (int i=0;i< i_Board.GetLength(1); i++)
             {
-                result.AppendFormat("  {0} ", i);
+                result.AppendFormat("  {0} ", i+1);
             }
-
+            result.AppendLine();
             for (int i = 0; i < i_Board.GetLength(0); i++)
             {
                 for (int j = 0; j < i_Board.GetLength(1); j++)

@@ -35,18 +35,15 @@ namespace C21_Ex02
                     System.Console.WriteLine("Invalid input");
                 }
             }
-            //o_Game.Player1 = new Player();
             Player Player1 = new Player();
             if (numberCount == 1)
             {
                 ComputerPlayer Player2 = new ComputerPlayer('O');
-                //o_Game.Player2 = new ComputerPlayer();
                 o_Game = new FourInARowGame(Player1, Player2);
             }
             else
             {
                 Player Player2 = new Player('O');
-                //o_Game.Player2 = new Player('O');
                 o_Game = new FourInARowGame(Player1, Player2);
             }
         }
@@ -73,14 +70,14 @@ namespace C21_Ex02
             {
                 System.Console.Write("Enter how many colums you want (4-8)");
                 string colsStr = System.Console.ReadLine();
-                int.TryParse(colsStr, out cols);
+                validCols=int.TryParse(colsStr, out cols);
                 if (cols < 4 || cols > 8)
                 {
                     validCols = false;
                 }
 
             }
-            o_Game.setBoard(rows, cols);
+            o_Game.initialBoard(rows, cols);
         }
 
 
