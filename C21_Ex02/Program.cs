@@ -10,9 +10,7 @@ namespace C21_Ex02
     {
         static void Main()
         {
-            FourInARowGame theGame=null;
-            Menu.initialTheGame(ref theGame);
-            UI.PrintBoard(theGame.getBoard());
+            Menu.MainMenu();
             
         }
     }
