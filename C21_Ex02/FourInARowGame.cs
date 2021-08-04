@@ -80,6 +80,11 @@ namespace C21_Ex02
             }
 
         }
+
+
+        public bool validMove() { return true; }//need to write
+
+
     }
 
 }

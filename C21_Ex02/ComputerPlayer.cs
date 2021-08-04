@@ -9,6 +9,9 @@ namespace C21_Ex02
     public class ComputerPlayer : Player
     {
 
+     
+
+
     }
 
 }
