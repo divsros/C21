@@ -11,8 +11,9 @@ namespace C21_Ex02
         public static void PrintBoard(char[,] i_Board)
         {
             int signAmount = 1 + 4 * i_Board.GetLength(1);
-
             StringBuilder result = new StringBuilder();
+
+            Ex02.ConsoleUtils.Screen.Clear();
             for (int i=0;i< i_Board.GetLength(1); i++)
             {
                 result.AppendFormat("  {0} ", i+1);
