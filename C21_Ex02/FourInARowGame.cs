@@ -15,11 +15,15 @@ namespace C21_Ex02
         private string winner;
 
 
-
+        public FourInARowGame(Player i_Player1, ComputerPlayer i_Player2)
+        {
+            player1 = new Player(i_Player1.Sign);
+            player2 = new ComputerPlayer(i_Player2.Sign);
+        }
         public FourInARowGame(Player i_Player1, Player i_Player2)
         {
-            player1.Sign = i_Player1.Sign;
-            player2.Sign = i_Player2.Sign;
+            player1 = new Player(i_Player1.Sign);
+            player2= new Player(i_Player2.Sign);
             winner = string.Empty;
         }
         public void setBoard(int i_Rows, int i_Cols)

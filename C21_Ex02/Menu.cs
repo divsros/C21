@@ -35,24 +35,21 @@ namespace C21_Ex02
                     System.Console.WriteLine("Invalid input");
                 }
             }
-            Player player1 = new Player();
-            player1.Sign = 'X';
-            Player player2;
+            //o_Game.Player1 = new Player();
+            Player Player1 = new Player();
             if (numberCount == 1)
             {
-                player2 = new ComputerPlayer();
-                player2.Sign = 'O';
+                ComputerPlayer Player2 = new ComputerPlayer('O');
+                //o_Game.Player2 = new ComputerPlayer();
+                o_Game = new FourInARowGame(Player1, Player2);
             }
             else
             {
-                player2 = new Player();
-                player2.Sign = 'O';
+                Player Player2 = new Player('O');
+                //o_Game.Player2 = new Player('O');
+                o_Game = new FourInARowGame(Player1, Player2);
             }
-
-            o_Game.Player1 = player1;
-            o_Game.Player2 = player2;
         }
-
         public static void initialBoard(ref FourInARowGame o_Game)
         {
             int cols = 0;
@@ -85,6 +82,9 @@ namespace C21_Ex02
             }
             o_Game.setBoard(rows, cols);
         }
+
+
+
 
 
     }
