@@ -11,10 +11,11 @@ namespace C21_Ex02
     {
         enum MenuOptions
         {
-            newGame = '1', printInstructions, exitGame
+            newGame = 1, printInstructions, exitGame
         }
         public static void MainMenu()
         {
+            int menuChoise = 0;
             bool validChoise = false;
             while (validChoise != true)
             {
@@ -22,20 +23,20 @@ namespace C21_Ex02
                 System.Console.WriteLine("1.start a new game");
                 System.Console.WriteLine("2.Print the instruction");
                 System.Console.WriteLine("3.Exit the game");
-                int choise1 = Convert.ToInt32(System.Console.ReadLine());
-                int choise = Convert.ToInt32(System.Console.ReadLine());
-                if (choise == (int)MenuOptions.newGame)
+                string choiseStr = System.Console.ReadLine();
+                int.TryParse(choiseStr, out menuChoise);
+                if (menuChoise == (int)MenuOptions.newGame)
                 {
                     newGame();
                     validChoise = true;
                 }
-                else if (choise == (int)MenuOptions.printInstructions)
+                else if (menuChoise == (int)MenuOptions.printInstructions)
                 {
                     GameInstructions();
                     validChoise = true;
                 }
 
-                else if (choise == (int)MenuOptions.exitGame)
+                else if (menuChoise == (int)MenuOptions.exitGame)
                 {
                     ExitGame();
                     validChoise = true;
@@ -86,18 +87,16 @@ namespace C21_Ex02
         }
         public static void initialThePlayers(ref FourInARowGame o_Game)
         {
-            int numberCount = 0;
+            int humanPlayers = 0;
             bool validPlayers = false;
             while (validPlayers != true)
-            {
-                
+            { 
                 System.Console.WriteLine("For two Human players press 2, to player against the computer press 1");
-                //ClearBuffer();
-                string test = System.Console.ReadLine();
-              //  numberCount = System.Console.Read();
-                if (numberCount != '1' && numberCount != '2')
+                string humanPlayersStr = System.Console.ReadLine();
+                int.TryParse(humanPlayersStr,out humanPlayers);
+                if (humanPlayers == 1 || humanPlayers == 2)
                 {
-                    validPlayers = false;
+                    validPlayers = true;
                 }
                 if (validPlayers == false)
                 {
@@ -106,7 +105,7 @@ namespace C21_Ex02
                 }
             }
             Player Player1 = new Player();
-            if (numberCount == 1)
+            if (humanPlayers == 1)
             {
                 ComputerPlayer Player2 = new ComputerPlayer('O');
                 o_Game = new FourInARowGame(Player1, Player2);
@@ -116,8 +115,6 @@ namespace C21_Ex02
                 Player Player2 = new Player('O');
                 o_Game = new FourInARowGame(Player1, Player2);
             }
-
-            ClearBuffer();
         }
         public static void initialBoard(ref FourInARowGame o_Game)
         {
