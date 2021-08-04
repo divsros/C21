@@ -33,11 +33,7 @@ namespace C21_Ex02
                 board = new char[i_Rows, i_Cols];
             }
         }
-        public bool setBoard(int i_Col)
-        {
-
-
-        }
+    
         public char[,] getBoard()
         {
             return board;
@@ -94,10 +90,36 @@ namespace C21_Ex02
         }
 
 
-        public bool validMove() { return true; }//need to write
+        public bool validMove(int i_Col,Player i_Player)
+        {
+            bool validCol = false;
+            bool validHeight = false;
+            bool validInput = false;
 
+            if (i_Col > 0 && i_Col < board.GetLength(1))
+            {
+                validCol = true;
+            }
 
+            if (validCol == true)
+            {
+                for (int i = 0; i < board.GetLength(0); i++)
+                {
+                    if (board[i_Col, i] == ' ')
+                    {
+                        validHeight = true;
+                        board[i_Col, i] = i_Player.Sign;
+                    }
+                }
+            }
 
+            if (validCol == true && validHeight == true)
+            {
+                validInput = true;
+            }
+
+            return validInput;
+        }
     }
 
 }
