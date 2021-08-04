@@ -10,7 +10,7 @@ namespace C21_Ex02
     {
         static void Main()
         {
-            FourInARowGame game = Menu.MainMenu();
+            Menu.MainMenu();
             
             
         }

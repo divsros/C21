@@ -19,7 +19,7 @@ namespace C21_Ex02
            Computer=1, Human
         }
 
-        public static FourInARowGame MainMenu()
+        public static void MainMenu()
         {
             int menuChoise = 0;
             bool validChoise = false;
@@ -54,28 +54,27 @@ namespace C21_Ex02
                     Ex02.ConsoleUtils.Screen.Clear();
                     System.Console.WriteLine("Invalid input");
                 }
-
-                return game;
-
-                /* switch (choise)
-                 {
-                     case MenuOptions.newGame:
-                         newGame();
-                         validChoise = true;
-                         break;
-                     case MenuOptions.printInstructions:
-                         GameInstructions();
-                         validChoise = true;
-                         break;
-                     case MenuOptions.exitGame:
-                         ExitGame();
-                         validChoise = true;
-                         break;
-                       default:
-                         Ex02.ConsoleUtils.Screen.Clear();
-                         System.Console.WriteLine("Invalid input");
-                         break;
-                 }*/
+                /*
+               switch (choise)
+                {
+                    case MenuOptions.newGame:
+                        newGame();
+                        validChoise = true;
+                        break;
+                    case MenuOptions.printInstructions:
+                        GameInstructions();
+                        validChoise = true;
+                        break;
+                    case MenuOptions.exitGame:
+                        ExitGame();
+                        validChoise = true;
+                        break;
+                      default:
+                        Ex02.ConsoleUtils.Screen.Clear();
+                        System.Console.WriteLine("Invalid input");
+                        break;
+                }
+                */
             }
         }
 
@@ -84,7 +83,7 @@ namespace C21_Ex02
             Ex02.ConsoleUtils.Screen.Clear();
             FourInARowGame theGame = null;
             Menu.initialTheGame(ref theGame);
-            UI.PrintBoard(theGame.getBoard());
+            UI.PrintBoard(theGame.Board);
 
             return theGame;
         }
