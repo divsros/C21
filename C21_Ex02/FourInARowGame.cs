@@ -136,6 +136,85 @@ namespace C21_Ex02
 
             return validInput;
         }
+
+        public bool checkRow(Player i_player, Point i_LastMove)
+        {
+            
+        }
+
+        public bool CheckIfWon(Player i_player, Point i_LastMove)
+        {
+            bool isWon = false; 
+            if(CheckRow(i_player ,i_LastMove) == true)
+            {
+                isWon = true;
+            }
+            else if(checkCol(i_Col) ==true)
+            {
+                isWon = true;
+            }
+
+            return isWon;
+            
+        }
+        public bool CheckIfGameOver()
+        {
+            bool isGameOver = false;
+
+            if(CheckIfWon(player1, i_LastMove) == true)
+            {
+                //UI.PrintMsg(player1Wins);
+                isGameOver = true;
+            }
+            else if(CheckIfWon(player2, i_LastMove) == true)
+            {
+                //UI.PrintMsg(player2Wins);
+                isGameOver = true;
+            }
+            else if(CheckIfDraw(i_LastMove) == true)
+            {
+                //UI.PrintMsg(Draw);
+                isGameOver = true;
+            }
+
+        }
+
+        public void RunGame()
+        {
+            string strColInput;
+            int intColInput;
+            bool isGameOver = false;
+            
+            while (isGameOver == false)
+            {
+                //UI.PrintTurn();
+                //UI.PrintInstruction();
+                strColInput = System.Console.ReadLine();
+
+                if (int.TryParse(strColInput, out intColInput) == true)
+                {
+                    SetMove(intColInput, player1);
+                    isGameOver = CheckIfGameOver();
+                    if(isGameOver == true)
+                    {
+                        //EndGame();
+                    }
+                    SetMove(intColInput, player2);
+                    isGameOver = CheckIfGameOver();
+                    if (isGameOver == true)
+                    {
+                        //EndGame();
+                    }
+
+                }
+                else
+                {
+                    //UI.PrintErrorMsg(inValidColumn);
+                }
+            }
+        }
+
+
     }
 
 

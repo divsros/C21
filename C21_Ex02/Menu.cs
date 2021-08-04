@@ -13,14 +13,18 @@ namespace C21_Ex02
         {
             newGame = 1, printInstructions, exitGame
         }
+
         enum Enemy
         {
            Computer=1, Human
         }
-        public static void MainMenu()
+
+        public static FourInARowGame MainMenu()
         {
             int menuChoise = 0;
             bool validChoise = false;
+            FourInARowGame game = null;
+
             while (validChoise != true)
             {
                 System.Console.WriteLine("Welcome To Four In A Row game!");
@@ -31,7 +35,7 @@ namespace C21_Ex02
                 int.TryParse(choiseStr, out menuChoise);
                 if (menuChoise == (int)MenuOptions.newGame)
                 {
-                    newGame();
+                    game = newGame();
                     validChoise = true;
                 }
                 else if (menuChoise == (int)MenuOptions.printInstructions)
@@ -50,6 +54,8 @@ namespace C21_Ex02
                     Ex02.ConsoleUtils.Screen.Clear();
                     System.Console.WriteLine("Invalid input");
                 }
+
+                return game;
 
                 /* switch (choise)
                  {
@@ -73,20 +79,23 @@ namespace C21_Ex02
             }
         }
 
-        public static void newGame()
+        public static FourInARowGame newGame()
         {
             Ex02.ConsoleUtils.Screen.Clear();
             FourInARowGame theGame = null;
             Menu.initialTheGame(ref theGame);
             UI.PrintBoard(theGame.getBoard());
 
+            return theGame;
         }
+
         public static void initialTheGame(ref FourInARowGame o_Game)
         {
             initialThePlayers(ref o_Game);
             Ex02.ConsoleUtils.Screen.Clear();
             initialBoard(ref o_Game);
         }
+
         public static void initialThePlayers(ref FourInARowGame o_Game)
         {
             int humanPlayers = 0;
@@ -118,6 +127,7 @@ namespace C21_Ex02
                 o_Game = new FourInARowGame(Player1, Player2);
             }
         }
+
         public static void initialBoard(ref FourInARowGame o_Game)
         {
             int cols = 0;
