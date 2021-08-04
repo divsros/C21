@@ -13,12 +13,12 @@ namespace C21_Ex02
         {
             this.Sign = i_Sign;
         }
-
+/*
         public int computerBestMove(char[,] io_matrix)
         {
             int index = 0;
             bool didAMove = false;
-            if (checkForWinningOption(io_matrix) == true)
+           if (checkForWinningOption(io_matrix) == true)
             {
                 didAMove = true;
             }
@@ -32,7 +32,7 @@ namespace C21_Ex02
 
 
 
-        }
+        }*/
 
 
     }

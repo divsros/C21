@@ -89,33 +89,49 @@ namespace C21_Ex02
 
         }
 
-
-        public bool validMove(int i_Col,Player i_Player)
+        public bool validCol(int i_Col)
         {
             bool validCol = false;
-            bool validHeight = false;
-            bool validInput = false;
-
-            if (i_Col > 0 && i_Col < board.GetLength(1))
+            if (i_Col > 0 && i_Col <= board.GetLength(1))
             {
                 validCol = true;
             }
 
-            if (validCol == true)
+            return validCol; 
+        }
+
+
+        public bool GetRowToInput(int i_MatrixCol, out int io_MatrixRow)
+        {
+            io_MatrixRow = 0;
+            bool validRowFound = false;
+            for (int i = 0; i < board.GetLength(0); i++)
             {
-                for (int i = 0; i < board.GetLength(0); i++)
+                io_MatrixRow = board.GetLength(0) - i - 1;
+                if (board[i_MatrixCol, io_MatrixRow] == ' ')
                 {
-                    if (board[i_Col, i] == ' ')
-                    {
-                        validHeight = true;
-                        board[i_Col, i] = i_Player.Sign;
-                    }
-                }
+                    validRowFound = true;
+                    break;
+                }   
             }
 
-            if (validCol == true && validHeight == true)
+            return validRowFound;
+        }
+
+        public bool SetMove(int i_MatrixCol,Player i_Player)
+        {
+
+            int matrixRow;
+            bool validInput = false;
+
+            if (validCol(i_MatrixCol) == true)
             {
-                validInput = true;
+
+                if (GetRowToInput(i_MatrixCol, out matrixRow) == true)
+                {
+                    board[i_MatrixCol, matrixRow] = i_Player.Sign;
+                    validInput = true;
+                } 
             }
 
             return validInput;

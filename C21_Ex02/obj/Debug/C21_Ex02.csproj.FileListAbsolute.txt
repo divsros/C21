@@ -15,3 +15,11 @@ C:\Users\97254\source\repos\C21 Ex01 TomerGilad 313246621 OrIsrael 204684724\C21
 C:\Users\97254\source\repos\C21 Ex01 TomerGilad 313246621 OrIsrael 204684724\C21_Ex02\bin\Debug\C21_Ex02.exe
 C:\Users\97254\source\repos\C21 Ex01 TomerGilad 313246621 OrIsrael 204684724\C21_Ex02\bin\Debug\C21_Ex02.pdb
 C:\Users\97254\source\repos\C21 Ex01 TomerGilad 313246621 OrIsrael 204684724\C21_Ex02\obj\Debug\C21_Ex02.csproj.CopyComplete
+C:\Users\97254\source\repos\C21\C21_Ex02\obj\Debug\C21_Ex02.csprojAssemblyReference.cache
+C:\Users\97254\source\repos\C21\C21_Ex02\obj\Debug\C21_Ex02.csproj.CoreCompileInputs.cache
+C:\Users\97254\source\repos\C21\C21_Ex02\obj\Debug\C21_Ex02.exe
+C:\Users\97254\source\repos\C21\C21_Ex02\obj\Debug\C21_Ex02.pdb
+C:\Users\97254\source\repos\C21\C21_Ex02\bin\Debug\C21_Ex02.exe.config
+C:\Users\97254\source\repos\C21\C21_Ex02\bin\Debug\C21_Ex02.exe
+C:\Users\97254\source\repos\C21\C21_Ex02\bin\Debug\C21_Ex02.pdb
+C:\Users\97254\source\repos\C21\C21_Ex02\obj\Debug\C21_Ex02.csproj.CopyComplete
