@@ -23,7 +23,7 @@ namespace C21_Ex02
         public FourInARowGame(Player i_Player1, Player i_Player2)
         {
             player1 = new Player(i_Player1.Sign);
-            player2= new Player(i_Player2.Sign);
+            player2 = new Player(i_Player2.Sign);
             winner = string.Empty;
         }
         public void initialBoard(int i_Rows, int i_Cols)
@@ -33,10 +33,10 @@ namespace C21_Ex02
                 board = new char[i_Rows, i_Cols];
             }
         }
-    
+
         public Player Player1
         {
-            get 
+            get
             {
                 return player1;
             }
@@ -105,7 +105,7 @@ namespace C21_Ex02
                 validCol = true;
             }
 
-            return validCol; 
+            return validCol;
         }
         public bool validRow(int i_Row)
         {
@@ -131,6 +131,9 @@ namespace C21_Ex02
 
             return onBoard;
         }
+
+
+///////////////////////////Check For Victory funcs///////////////////////////////
         public bool StopCheckForAFour(Point i_MatrixPoint, Player i_Player)
         {
             bool stopCheck = IsOnBoard(i_MatrixPoint);
@@ -145,7 +148,6 @@ namespace C21_Ex02
 
             return stopCheck;
         }
-
         public bool CheckIfWon(Player i_Player, Point i_LastMove)
         {
             bool isWon = false;
@@ -206,7 +208,7 @@ namespace C21_Ex02
 
             while (checkRightUp == false)
             {
-                currentPoint.AddValues(1,-1);
+                currentPoint.AddValues(1, -1);
                 checkRightUp = StopCheckForAFour(currentPoint, i_Player);
                 if (checkRightUp == false)
                 {
@@ -243,7 +245,6 @@ namespace C21_Ex02
             }
             return isWin;
         }
-        
         public bool CheckRow(Player i_Player, Point i_LastMove)
         {
             bool isThereFourCoins = false;
@@ -270,7 +271,6 @@ namespace C21_Ex02
 
             return isThereFourCoins;
         }
-
         public bool CheckColum(Player i_Player, Point i_LastMove)
         {
             bool stopCheckingDown = false;
@@ -287,7 +287,7 @@ namespace C21_Ex02
                 }
 
             }
-            if(coinsCount>=4)
+            if (coinsCount >= 4)
             {
                 isThereFourCoins = true;
             }
@@ -296,6 +296,7 @@ namespace C21_Ex02
         }
 
 
+///////////////////////////
         public bool GetRowToInput(int i_MatrixCol, out int io_MatrixRow)
         {
             io_MatrixRow = 0;
@@ -307,13 +308,13 @@ namespace C21_Ex02
                 {
                     validRowFound = true;
                     break;
-                }   
+                }
             }
 
             return validRowFound;
         }
 
-        public bool SetMove(int i_MatrixCol,Player i_Player, out int o_MatrixRow)
+        public bool SetMove(int i_MatrixCol, Player i_Player, out int o_MatrixRow)
         {
 
             int matrixRow;
@@ -326,9 +327,9 @@ namespace C21_Ex02
                 if (GetRowToInput(i_MatrixCol, out matrixRow) == true)
                 {
                     board[i_MatrixCol, matrixRow] = i_Player.Sign;
-                    o_MatrixRow = matrixRow; 
+                    o_MatrixRow = matrixRow;
                     validInput = true;
-                } 
+                }
             }
 
             return validInput;
@@ -337,7 +338,7 @@ namespace C21_Ex02
         public bool CheckIfDraw(Point i_LastMove)
         {
             bool isDraw = false;
-            if(i_LastMove.Y == 0)
+            if (i_LastMove.Y == 0)
             {
                 isDraw = true;
             }
@@ -345,74 +346,75 @@ namespace C21_Ex02
             return isDraw;
         }
 
-       
+
         public bool CheckIfGameOver(Player i_Player, Point i_LastMove)
         {
             bool isGameOver = false;
 
-            if(CheckIfWon(player1, i_LastMove) == true)
+            if (CheckIfWon(player1, i_LastMove) == true)
             {
                 //UI.PrintMsg(player1Wins);
                 isGameOver = true;
             }
-            else if(CheckIfWon(player2, i_LastMove) == true)///נגעתי בטעות אני מניח
+            else if (CheckIfWon(player2, i_LastMove) == true)///נגעתי בטעות אני מניח
             {
                 //UI.PrintMsg(player2Wins);
                 isGameOver = true;
             }
-             else if(CheckIfDraw(i_LastMove) == true)
-             {
-                 //UI.PrintMsg(Draw);
-                 isGameOver = true;
-             }
+            else if (CheckIfDraw(i_LastMove) == true)
+            {
+                //UI.PrintMsg(Draw);
+                isGameOver = true;
+            }
             return isGameOver;
         }
 
-        public bool turnOf(Player i_Player)
+
+
+        public bool turnOff(Player i_Player, Point i_LastMove)
         {
+           
             bool isEnded = false;
             string strColInput = string.Empty;
             int intColInput;
+            int MatrixRow = 0;
             bool isGameOver = false;
-            Point lastMove;
+            Point lastMove = new Point();
+            lastMove.X = 0;
+            lastMove.Y = 0;
             lastMove.SetPoint(0, 0);
             
-            
-            out int MatrixRow;
-
             while (isEnded == false)
             {
                 strColInput = System.Console.ReadLine();
-               
+
 
                 if (int.TryParse(strColInput, out intColInput) == true)
                 {
-                    
+
 
                     isEnded = true;
-                    SetMove(intColInput, i_Player, out MatrixRow);
-                    lastMove.SetPoint(intColInput, MatrixRow);
+                    SetMove(intColInput, i_Player,out MatrixRow);
+                    //lastMove.Point(intColInput, MatrixRow);
                     isGameOver = CheckIfGameOver(player1, lastMove);
 
                     if (isGameOver == true)
                     {
-                        //EndGame();
+                       // EndGame();
                     }
 
-                    /*   SetMove(intColInput, player2, out MatrixRow);
-                       isGameOver = CheckIfGameOver();
-                       if (isGameOver == true)
-                       {
-                           //EndGame();
-                       }*/
-
+                    SetMove(intColInput, player2,out MatrixRow);
+                    //isGameOver = CheckIfGameOver();
+                    if (isGameOver == true)
+                    {
+                        //EndGame();
+                    }
                 }
                 else
                 {
                     //UI.PrintErrorMsg(inValidColumn);
                 }
             }
-
             return isEnded;
         }
 
@@ -421,23 +423,27 @@ namespace C21_Ex02
             string strColInput;
             int intColInput;
             bool isGameOver = false;
-            
+
             while (isGameOver == false)
             {
-                //UI.PrintTurn();
+                bool validInput = false;
+                while (validInput == false)
+                {
+                    
+                    strColInput = System.Console.ReadLine();
+
+                }
+
+                UI.PrintBoard(board);
                 //UI.PrintInstruction();
-               
-                
-               
+
+
+
             }
         }
-
-
     }
 
-
-
-
-
-
 }
+
+
+  

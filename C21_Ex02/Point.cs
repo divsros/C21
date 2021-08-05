@@ -17,6 +17,18 @@ namespace C21_Ex02
             y = i_Y;
         }
 
+        public Point point
+        {
+            get
+            {
+                return this;
+            }
+            set
+            {
+                this.x = value.x;
+                this.y = value.y;
+            }
+        }
         public int X
         {
             get

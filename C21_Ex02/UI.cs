@@ -14,9 +14,9 @@ namespace C21_Ex02
             StringBuilder result = new StringBuilder();
 
             Ex02.ConsoleUtils.Screen.Clear();
-            for (int i=0;i< i_Board.GetLength(1); i++)
+            for (int i = 0; i < i_Board.GetLength(1); i++)
             {
-                result.AppendFormat("  {0} ", i+1);
+                result.AppendFormat("  {0} ", i + 1);
             }
             result.AppendLine();
             for (int i = 0; i < i_Board.GetLength(0); i++)
