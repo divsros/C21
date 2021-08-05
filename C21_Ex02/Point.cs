@@ -6,11 +6,16 @@ using System.Threading.Tasks;
 
 namespace C21_Ex02
 {
-    struct Point
+    public struct Point
     {
         private int x;
         private int y;
 
+        public Point(int i_X, int i_Y)
+        {
+            x = i_X;
+            y = i_Y;
+        }
 
         public int X
         {

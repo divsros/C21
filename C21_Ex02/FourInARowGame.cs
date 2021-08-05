@@ -243,58 +243,34 @@ namespace C21_Ex02
             }
             return isWin;
         }
-        public bool CheckRowToRight(Player i_Player, Point i_LastMove)
-        {
-            bool isThereFourCoins = false;
-            int coinsCount = 0;
-            int currentCol = i_LastMove.X;
-
-            while (board[i_LastMove.Y, currentCol] == i_Player.Sign && currentCol < board.GetLength(0))
-            {
-                coinsCount++;
-                currentCol++;
-                if (coinsCount == 4)
-                {
-                    isThereFourCoins = true;
-                    break;
-                }
-            }
-
-            return isThereFourCoins;
-        }
-        public bool CheckRowToLeft(Player i_Player, Point i_LastMove)
-        {
-            bool isThereFoureCoins = false;
-            int coinsCount = 0;
-            int currentCol = i_LastMove.X;
-
-            while (board[i_LastMove.Y, currentCol] == i_Player.Sign && currentCol >= 0)
-            {
-                coinsCount++;
-                currentCol--;
-                if (coinsCount == 4)
-                {
-                    isThereFoureCoins = true;
-                }
-            }
-
-            return isThereFoureCoins;
-        }
+        
         public bool CheckRow(Player i_Player, Point i_LastMove)
         {
             bool isThereFourCoins = false;
+            int coinsCount = 0;
+            int currentCol = i_LastMove.X;
+            int i = 0;
 
-            if (CheckRowToRight(i_Player, i_LastMove) == true)
+            while (i <= 3 && currentCol < board.GetLength(0))
             {
-                isThereFourCoins = true;
-            }
-            else if (CheckRowToLeft(i_Player, i_LastMove) == true)
-            {
-                isThereFourCoins = true;
+                while (board[i_LastMove.Y, currentCol] == i_Player.Sign && currentCol >= 0)
+                {
+                    coinsCount++;
+                    currentCol--;
+                    if (coinsCount == 4)
+                    {
+                        isThereFourCoins = true;
+                    }
+                }
+
+                i++;
+                currentCol = i_LastMove.X + i;
+                coinsCount = 0;
             }
 
             return isThereFourCoins;
         }
+
         public bool CheckColum(Player i_Player, Point i_LastMove)
         {
             bool stopCheckingDown = false;
@@ -337,23 +313,36 @@ namespace C21_Ex02
             return validRowFound;
         }
 
-        public bool SetMove(int i_MatrixCol,Player i_Player)
+        public bool SetMove(int i_MatrixCol,Player i_Player, out int o_MatrixRow)
         {
 
             int matrixRow;
             bool validInput = false;
 
+            o_MatrixRow = -1;
             if (validCol(i_MatrixCol) == true)
             {
 
                 if (GetRowToInput(i_MatrixCol, out matrixRow) == true)
                 {
                     board[i_MatrixCol, matrixRow] = i_Player.Sign;
+                    o_MatrixRow = matrixRow; 
                     validInput = true;
                 } 
             }
 
             return validInput;
+        }
+
+        public bool CheckIfDraw(Point i_LastMove)
+        {
+            bool isDraw = false;
+            if(i_LastMove.Y == 0)
+            {
+                isDraw = true;
+            }
+
+            return isDraw;
         }
 
        
@@ -371,46 +360,75 @@ namespace C21_Ex02
                 //UI.PrintMsg(player2Wins);
                 isGameOver = true;
             }
-            /* else if(CheckIfDraw(i_LastMove) == true)
+             else if(CheckIfDraw(i_LastMove) == true)
              {
                  //UI.PrintMsg(Draw);
                  isGameOver = true;
-             }*/
+             }
             return isGameOver;
         }
 
-        public void RunGame()
+        public bool turnOf(Player i_Player)
         {
-            //string strColInput;
-            //int intColInput;
+            bool isEnded = false;
+            string strColInput = string.Empty;
+            int intColInput;
             bool isGameOver = false;
+            Point lastMove;
+            lastMove.SetPoint(0, 0);
             
-            while (isGameOver == false)
+            
+            out int MatrixRow;
+
+            while (isEnded == false)
             {
-               /* //UI.PrintTurn();
-                //UI.PrintInstruction();
                 strColInput = System.Console.ReadLine();
+               
 
                 if (int.TryParse(strColInput, out intColInput) == true)
                 {
-                    SetMove(intColInput, player1);
-                    isGameOver = CheckIfGameOver();
-                    if(isGameOver == true)
-                    {
-                        //EndGame();
-                    }
-                    SetMove(intColInput, player2);
-                    isGameOver = CheckIfGameOver();
+                    
+
+                    isEnded = true;
+                    SetMove(intColInput, i_Player, out MatrixRow);
+                    lastMove.SetPoint(intColInput, MatrixRow);
+                    isGameOver = CheckIfGameOver(player1, lastMove);
+
                     if (isGameOver == true)
                     {
                         //EndGame();
                     }
 
+                    /*   SetMove(intColInput, player2, out MatrixRow);
+                       isGameOver = CheckIfGameOver();
+                       if (isGameOver == true)
+                       {
+                           //EndGame();
+                       }*/
+
                 }
                 else
                 {
                     //UI.PrintErrorMsg(inValidColumn);
-                }*/
+                }
+            }
+
+            return isEnded;
+        }
+
+        public void RunGame()
+        {
+            string strColInput;
+            int intColInput;
+            bool isGameOver = false;
+            
+            while (isGameOver == false)
+            {
+                //UI.PrintTurn();
+                //UI.PrintInstruction();
+               
+                
+               
             }
         }
 
