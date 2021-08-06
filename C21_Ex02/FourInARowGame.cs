@@ -109,7 +109,7 @@ namespace C21_Ex02
         public bool validCol(int i_Col)
         {
             bool validCol = false;
-            if (i_Col > 0 && i_Col <= board.GetLength(1))
+            if (i_Col >= 0 && i_Col < board.GetLength(1))
             {
                 validCol = true;
             }
@@ -120,7 +120,7 @@ namespace C21_Ex02
         {
             bool validRow = false;
 
-            if (i_Row > 0 && i_Row <= board.GetLength(0))
+            if (i_Row > 0 && i_Row < board.GetLength(0))
             {
                 validRow = true;
             }
@@ -143,15 +143,16 @@ namespace C21_Ex02
         }
 
 ///////////////////////////Check For Victory funcs///////////////////////////////
+
         public bool StopCheckForAFour(Point i_MatrixPoint, Player i_Player)
         {
-            bool stopCheck = IsOnBoard(i_MatrixPoint);
+            bool stopCheck = !IsOnBoard(i_MatrixPoint);
 
             if (stopCheck == false)
             {
-                if (board[i_MatrixPoint.X, i_MatrixPoint.Y] != i_Player.Sign)
+                if (board[i_MatrixPoint.Y, i_MatrixPoint.X] != i_Player.Sign)
                 {
-                    stopCheck = false;
+                    stopCheck = true;
                 }
             }
 
@@ -267,7 +268,7 @@ namespace C21_Ex02
 
             while (i <= 3 && currentCol < board.GetLength(0))
             {
-                while (board[i_LastMove.Y, currentCol] == i_Player.Sign && currentCol - 1 >= 0)
+                while (currentCol >= 0 && board[i_LastMove.Y, currentCol] == i_Player.Sign)
                 {
                     coinsCount++;
                     currentCol--;
@@ -298,6 +299,10 @@ namespace C21_Ex02
                 {
                     coinsCount++;
                 }
+                else
+                {
+                    stopCheckingDown = true;
+                }
 
             }
             if (coinsCount >= 4)
@@ -317,7 +322,7 @@ namespace C21_Ex02
             for (int i = 0; i < board.GetLength(0); i++)
             {
                 io_MatrixRow = board.GetLength(0) - i - 1;
-                if (board[i_MatrixCol, io_MatrixRow] == ' ')
+                if (board[io_MatrixRow, i_MatrixCol] == ' ')
                 {
                     validRowFound = true;
                     break;
@@ -403,11 +408,12 @@ namespace C21_Ex02
                 if (int.TryParse(strColInput, out intColInput) == true)
                 {
                     isEnded = true;
-                    SetMove(intColInput, i_Player,out MatrixRow);
+                    int matrixCol = intColInput - 1;
+                    SetMove(matrixCol, i_Player,out MatrixRow);
                     Ex02.ConsoleUtils.Screen.Clear();
                     //UI.PrintInstruction();
                     UI.PrintBoard(board);
-                    lastMove.SetPoint(intColInput, MatrixRow);
+                    lastMove.SetPoint(matrixCol, MatrixRow);
                 }
                 else
                 {
@@ -423,10 +429,15 @@ namespace C21_Ex02
             Point lastMove;
             while (isGameOver == false)
             {
-                    lastMove = turnOf(Player1);
-                    isGameOver = CheckIfGameOver(player1, lastMove);
-                    lastMove = turnOf(Player2);
-                    isGameOver = CheckIfGameOver(player2, lastMove);
+                lastMove = turnOf(Player1);
+                isGameOver = CheckIfGameOver(player1, lastMove);
+                if(isGameOver == true)
+                {
+                    break;
+                }
+
+                lastMove = turnOf(Player2);
+                isGameOver = CheckIfGameOver(player2, lastMove);
             }
 
             //UI.EndGame();
