@@ -84,6 +84,7 @@ namespace C21_Ex02
             FourInARowGame theGame = null;
             Menu.initialTheGame(ref theGame);
             UI.PrintBoard(theGame.Board);
+            theGame.RunGame();
 
             return theGame;
         }
