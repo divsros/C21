@@ -32,6 +32,29 @@ namespace C21_Ex02
             }
             System.Console.WriteLine(result);
         }
+        public static void EndGame()
+        {
+            Ex02.ConsoleUtils.Screen.Clear();
+            System.Console.WriteLine("Game Over");
+        }
+        public static void PrintErrorMsg()
+        {
+            Ex02.ConsoleUtils.Screen.Clear();
+            System.Console.WriteLine("Invalid Colum");
+        }
+        public static void PrintInstruction()
+        {
+            Ex02.ConsoleUtils.Screen.Clear();
+
+            System.Console.WriteLine("Enter a colum number you wish you choose which isnt full");
+        }
+        public static void PrintDraw()
+        {
+            Ex02.ConsoleUtils.Screen.Clear();
+            System.Console.WriteLine("Draw");
+        }
+
+
     }
 }
             
