@@ -381,7 +381,7 @@ namespace C21_Ex02
             }
             else if (CheckIfDraw(i_LastMove) == true)
             {
-                UI.PrintDraw();
+                //UI.PrintMsg(Draw);
                 isGameOver = true;
             }
             return isGameOver;
@@ -411,13 +411,13 @@ namespace C21_Ex02
                     int matrixCol = intColInput - 1;
                     SetMove(matrixCol, i_Player,out MatrixRow);
                     Ex02.ConsoleUtils.Screen.Clear();
-                    UI.PrintInstruction();
+                    //UI.PrintInstruction();
                     UI.PrintBoard(board);
                     lastMove.SetPoint(matrixCol, MatrixRow);
                 }
                 else
                 {
-                    UI.PrintErrorMsg();
+                    //UI.PrintErrorMsg(inValidColumn);
                 }
             }
             return lastMove;
@@ -440,7 +440,7 @@ namespace C21_Ex02
                 isGameOver = CheckIfGameOver(player2, lastMove);
             }
 
-            UI.EndGame();
+            //UI.EndGame();
         }
     }
 

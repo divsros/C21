@@ -23,12 +23,3 @@ C:\Users\97254\source\repos\C21\C21_Ex02\bin\Debug\C21_Ex02.exe.config
 C:\Users\97254\source\repos\C21\C21_Ex02\bin\Debug\C21_Ex02.exe
 C:\Users\97254\source\repos\C21\C21_Ex02\bin\Debug\C21_Ex02.pdb
 C:\Users\97254\source\repos\C21\C21_Ex02\obj\Debug\C21_Ex02.csproj.CopyComplete
-C:\Users\Tomer\Documents\GitHub\C21\C21_Ex02\bin\Debug\C21_Ex02.exe.config
-C:\Users\Tomer\Documents\GitHub\C21\C21_Ex02\bin\Debug\C21_Ex02.exe
-C:\Users\Tomer\Documents\GitHub\C21\C21_Ex02\bin\Debug\C21_Ex02.pdb
-C:\Users\Tomer\Documents\GitHub\C21\C21_Ex02\bin\Debug\Ex02.ConsoleUtils.dll
-C:\Users\Tomer\Documents\GitHub\C21\C21_Ex02\obj\Debug\C21_Ex02.csproj.AssemblyReference.cache
-C:\Users\Tomer\Documents\GitHub\C21\C21_Ex02\obj\Debug\C21_Ex02.csproj.CoreCompileInputs.cache
-C:\Users\Tomer\Documents\GitHub\C21\C21_Ex02\obj\Debug\C21_Ex02.csproj.CopyComplete
-C:\Users\Tomer\Documents\GitHub\C21\C21_Ex02\obj\Debug\C21_Ex02.exe
-C:\Users\Tomer\Documents\GitHub\C21\C21_Ex02\obj\Debug\C21_Ex02.pdb
